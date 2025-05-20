@@ -139,7 +139,7 @@ export default function CoverLetterGallery() {
                     <img
                       src={example.image}
                       alt={`${example.title} cover letter example`}
-                      className="h-full w-full object-cover rounded-lg"
+                      className="h-full w-full object-fill rounded-lg"
                     />
 
                     {/* Overlay information */}

@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { ChevronDown, Menu, X } from "lucide-react";
 import Link from "next/link";
 
@@ -7,17 +7,37 @@ export default function Navbar() {
   const [hoveredItem, setHoveredItem] = useState(null);
   const [activeDropdown, setActiveDropdown] = useState(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  
+  // Refs for dropdown containers
+  const resumeDropdownRef = useRef(null);
+  const coverLetterDropdownRef = useRef(null);
 
+  // Function to handle mouseenter for dropdown items
   const handleMouseEnter = (item) => {
     setHoveredItem(item);
     setActiveDropdown(item);
   };
 
-  const handleMouseLeave = () => {
+  // Function to handle mouseleave for dropdown items
+  const handleMouseLeave = (e, item) => {
+    // Check if the mouse is moving to the dropdown
+    const relatedTarget = e.relatedTarget;
+    const dropdownRef = item === "resume" ? resumeDropdownRef : coverLetterDropdownRef;
+    
+    // Only clear the hover state if not moving to the dropdown or its children
+    if (dropdownRef.current && !dropdownRef.current.contains(relatedTarget)) {
+      setHoveredItem(null);
+      setActiveDropdown(null);
+    }
+  };
+
+  // Function to handle dropdown mouseleave
+  const handleDropdownMouseLeave = () => {
     setHoveredItem(null);
     setActiveDropdown(null);
   };
 
+  // Handle hover for regular links
   const handleLinkHover = (item) => {
     setHoveredItem(item);
   };
@@ -26,50 +46,78 @@ export default function Navbar() {
     setHoveredItem(null);
   };
 
+  // Toggle mobile menu
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
   };
 
+  // Toggle mobile dropdown
   const toggleMobileDropdown = (item) => {
     setActiveDropdown(activeDropdown === item ? null : item);
   };
 
+  // Close mobile menu when resizing to desktop
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 768) {
+        setMobileMenuOpen(false);
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  // Close mobile menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (mobileMenuOpen && !event.target.closest('header')) {
+        setMobileMenuOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [mobileMenuOpen]);
+
   return (
-    <header className="relative bg-white shadow-sm">
-      <div className="container mx-auto ">
+    <header className="relative bg-white shadow-sm z-50">
+      <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex-shrink-0 flex items-center gap-2">
             <img
               src="/Clogo.png"
               alt="Careertronic Logo"
-              width={300}
-              height={200}
+              className="w-48 h-auto sm:w-64 md:w-72"
             />
           </div>
+          
           {/* Mobile menu button */}
           <div className="flex md:hidden">
             <button
               onClick={toggleMobileMenu}
               className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-red-500 hover:bg-gray-100 focus:outline-none"
+              aria-expanded={mobileMenuOpen}
+              aria-label="Toggle menu"
             >
               {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
           </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-6">
+          <nav className="hidden md:flex items-center space-x-3 lg:space-x-6">
             {/* Dropdown Items */}
             {["resume", "coverLetter"].map((item) => (
               <div
                 key={item}
                 className="relative"
                 onMouseEnter={() => handleMouseEnter(item)}
-                onMouseLeave={handleMouseLeave}
+                onMouseLeave={(e) => handleMouseLeave(e, item)}
               >
                 <button
-                  className={`flex items-center transition-colors ${
-                    hoveredItem === item
+                  className={`flex items-center transition-colors px-2 py-1 rounded-md ${
+                    hoveredItem === item || activeDropdown === item
                       ? "text-red-500"
                       : "text-gray-700 hover:text-red-500"
                   }`}
@@ -81,7 +129,12 @@ export default function Navbar() {
 
                 {/* Dropdowns */}
                 {activeDropdown === item && (
-                  <div className="absolute top-full right-0 mt-1 z-50 bg-white shadow-lg rounded-md overflow-hidden">
+                  <div 
+                    ref={item === "resume" ? resumeDropdownRef : coverLetterDropdownRef}
+                    className={`absolute top-full right-0 mt-1 z-50 bg-white shadow-lg rounded-md overflow-hidden`}
+                    onMouseEnter={() => setActiveDropdown(item)}
+                    onMouseLeave={handleDropdownMouseLeave}
+                  >
                     {item === "resume" && (
                       <div className="p-5 w-64 flex flex-col gap-3">
                         {/* Resume Builder Option */}
@@ -170,6 +223,9 @@ export default function Navbar() {
                               </h3>
                             </div>
                           </div>
+                          <button className="text-green-600 bg-white font-semibold rounded-lg text-sm hover:bg-green-50 transition-all duration-300">
+                            Coming Soon
+                          </button>
                           <p className="text-xs text-gray-600 group-hover:text-gray-700 transition-colors duration-200">
                             Ensure your resume passes through Applicant Tracking
                             Systems with our ATS optimization tool
@@ -200,7 +256,7 @@ export default function Navbar() {
                               </h3>
                             </div>
                           </div>
-                          <button className=" text-green-600 bg-white font-semibold  rounded-lg text-sm hover:bg-green-50 transition-all duration-300">
+                          <button className="text-green-600 bg-white font-semibold rounded-lg text-sm hover:bg-green-50 transition-all duration-300">
                             Coming Soon
                           </button>
                           <p className="text-xs text-gray-600 group-hover:text-gray-700 transition-colors duration-200">
@@ -213,9 +269,9 @@ export default function Navbar() {
                     )}
 
                     {item === "coverLetter" && (
-                      <div className="flex w-full md:w-[800px]">
+                      <div className="flex flex-col md:flex-row w-full md:w-[800px]">
                         {/* First column */}
-                        <div className="w-full md:w-1/3 p-5 border-r border-gray-100 space-y-6">
+                        <div className="w-full md:w-1/3 p-5 border-b md:border-b-0 md:border-r border-gray-100 space-y-6">
                           {/* Builder */}
                           <div className="group cursor-pointer">
                             <div className="flex items-center mb-3">
@@ -385,7 +441,7 @@ export default function Navbar() {
             {/* Direct Blog Link */}
             <Link
               href="/Blog"
-              className={`transition-colors ${
+              className={`transition-colors px-2 py-1 rounded-md ${
                 hoveredItem === "blog"
                   ? "text-red-500"
                   : "text-gray-700 hover:text-red-500"
@@ -398,7 +454,7 @@ export default function Navbar() {
 
             <Link
               href="/Price"
-              className={`transition-colors ${
+              className={`transition-colors px-2 py-1 rounded-md ${
                 hoveredItem === "pricing"
                   ? "text-red-500"
                   : "text-gray-700 hover:text-red-500"
@@ -408,11 +464,13 @@ export default function Navbar() {
             >
               Pricing
             </Link>
-            <div className="flex items-center space-x-4 ml-4">
-              <button className="px-4 py-2 text-sm font-medium text-gray-700 border border-gray-300 rounded-lg hover:bg-gray-100 transition-colors duration-200">
+            
+            {/* Action buttons - responsive spacings */}
+            <div className="hidden lg:flex items-center space-x-2 xl:space-x-4 ml-2 xl:ml-4">
+              <button className="px-3 py-1.5 lg:px-4 lg:py-2 text-xs lg:text-sm font-medium text-gray-700 border border-gray-300 rounded-lg hover:bg-gray-100 transition-colors duration-200">
                 Sign Up
               </button>
-              <button className="px-4 py-2 text-sm font-medium text-white bg-red-700 rounded-lg hover:bg-red-600 transition-colors duration-200">
+              <button className="px-3 py-1.5 lg:px-4 lg:py-2 text-xs lg:text-sm font-medium text-white bg-red-700 rounded-lg hover:bg-red-600 transition-colors duration-200">
                 Get Started
               </button>
             </div>
@@ -420,8 +478,14 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Menu */}
-      <div className={`${mobileMenuOpen ? "block" : "hidden"} md:hidden`}>
+      {/* Mobile Menu - Improved with animation */}
+      <div 
+        className={`md:hidden transition-all duration-300 ease-in-out ${
+          mobileMenuOpen 
+            ? "max-h-screen opacity-100" 
+            : "max-h-0 opacity-0 overflow-hidden"
+        }`}
+      >
         <div className="px-2 pt-2 pb-3 space-y-1 bg-white shadow-md">
           {/* Mobile Dropdown Items */}
           {["resume", "coverLetter"].map((item) => (
@@ -436,25 +500,31 @@ export default function Navbar() {
                 </span>
                 <ChevronDown
                   size={16}
-                  className={`transition-transform ${
+                  className={`transition-transform duration-300 ${
                     activeDropdown === item ? "rotate-180" : ""
                   }`}
                 />
               </button>
 
-              {/* Mobile Dropdown Content */}
-              {activeDropdown === item && (
+              {/* Mobile Dropdown Content - with animation */}
+              <div 
+                className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                  activeDropdown === item 
+                    ? "max-h-96 opacity-100" 
+                    : "max-h-0 opacity-0"
+                }`}
+              >
                 <div className="px-4 py-2 bg-gray-50 rounded-md mt-1">
                   {item === "resume" && (
-                    <div className="space-y-4">
-                      <div className="cursor-pointer">
+                    <div className="space-y-4 py-2">
+                      <Link href="/builder" className="block cursor-pointer">
                         <h3 className="text-sm font-medium text-red-500">
                           Resume Builder
                         </h3>
                         <p className="text-xs text-gray-600 mt-1">
                           Create your professional resume
                         </p>
-                      </div>
+                      </Link>
                       <div className="cursor-pointer">
                         <h3 className="text-sm font-medium text-red-500">
                           ATS Checker
@@ -475,23 +545,23 @@ export default function Navbar() {
                   )}
 
                   {item === "coverLetter" && (
-                    <div className="space-y-4">
-                      <div className="cursor-pointer">
+                    <div className="space-y-4 py-2">
+                      <Link href="/CoverLetter" className="block cursor-pointer">
                         <h3 className="text-sm font-medium text-red-500">
                           Cover Letter Builder
                         </h3>
                         <p className="text-xs text-gray-600 mt-1">
                           Write professional cover letters
                         </p>
-                      </div>
-                      <div className="cursor-pointer">
+                      </Link>
+                      <Link href="/CoverLetter" className="block cursor-pointer">
                         <h3 className="text-sm font-medium text-red-500">
                           Templates
                         </h3>
                         <p className="text-xs text-gray-600 mt-1">
                           Professionally designed templates
                         </p>
-                      </div>
+                      </Link>
                       <div className="cursor-pointer">
                         <h3 className="text-sm font-medium text-red-500">
                           Writing Guide
@@ -511,7 +581,7 @@ export default function Navbar() {
                     </div>
                   )}
                 </div>
-              )}
+              </div>
             </div>
           ))}
 

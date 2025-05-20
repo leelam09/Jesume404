@@ -230,7 +230,7 @@ export default function ResumeHero() {
       {/* Hero Content */}
       <div
         ref={heroRef}
-        className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-24 md:pt-20"
+        className="relative max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8 pb-24 md:pt-20"
       >
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 items-center">
           {/* Left Column - Copy */}
@@ -392,7 +392,7 @@ export default function ResumeHero() {
 
               {/* Floating Cards with animations */}
               <div
-                className="absolute -left-6 -bottom-24 z-20 bg-white/90 backdrop-blur-sm rounded-lg shadow-lg p-3 border border-gray-200 w-48 transition-all duration-500 hover:border-red-500/50 hover:shadow-red-500/20 hover:-translate-y-1 hover:scale-105"
+                className="hidden md:block absolute left-6 bottom-10 lg:-left-6 lg:-bottom-24 z-20 bg-white/90 backdrop-blur-sm rounded-lg shadow-lg p-3 border border-gray-200 w-48 transition-all duration-500 hover:border-red-500/50 hover:shadow-red-500/20 hover:-translate-y-1 hover:scale-105"
                 style={{ animation: "float 6s infinite ease-in-out" }}
               >
                 <div className="flex justify-between items-center mb-2">
@@ -412,7 +412,7 @@ export default function ResumeHero() {
               </div>
 
               <div
-                className="absolute -right-24 top-6 z-20 bg-white/90 backdrop-blur-sm rounded-lg shadow-lg p-3 border border-gray-200 w-48 transition-all duration-500 hover:border-red-500/50 hover:shadow-red-500/20 hover:-translate-y-1 hover:scale-105"
+                className="hidden md:block absolute right-10 top-6 z-20 bg-white/90 backdrop-blur-sm rounded-lg shadow-lg p-3 border border-gray-200 w-48 transition-all duration-500 hover:border-red-500/50 hover:shadow-red-500/20 hover:-translate-y-1 hover:scale-105"
                 style={{ animation: "float 7s infinite ease-in-out 1s" }}
               >
                 <div className="flex justify-between items-center mb-2">
@@ -433,7 +433,7 @@ export default function ResumeHero() {
 
               {/* Template Options Panel - Enhanced version */}
               <div
-                className="absolute -right-56 -bottom-36 z-20 bg-white/90 backdrop-blur-sm rounded-xl shadow-xl p-4 border border-gray-200 w-64 md:w-72 transition-all duration-500 hover:shadow-red-500/20"
+                className="hidden md:block absolute right-10 lg:-right-6 bottom-4 lg:-bottom-36 z-20 bg-white/90 backdrop-blur-sm rounded-xl shadow-xl p-4 border border-gray-200 w-52 md:w-60 transition-all duration-500 hover:shadow-red-500/20"
                 style={{ animation: "float 8s infinite ease-in-out 0.5s" }}
               >
                 <div className="text-sm font-medium text-gray-900 mb-3 flex items-center justify-between">

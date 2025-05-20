@@ -148,7 +148,7 @@ export default function HomePage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white to-gray-100">
+    <div className="min-h-screen bg-gradient-to-b from-white to-gray-100 overflow-x-hidden">
       <Navbar />
       <ResumeHero />
       {/* Hero Section */}

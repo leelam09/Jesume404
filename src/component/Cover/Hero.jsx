@@ -89,7 +89,7 @@ export default function ResumeBuilderHero() {
   </div> */}
 
   {/* Mobile Preview - Hidden on mobile, visible on larger screens */}
-  <div className="absolute -bottom-12 sm:-bottom-16 -right-10 sm:-right-16 w-40 sm:w-56 h-64 sm:h-80 bg-white rounded-md shadow-lg border border-gray-100 p-2 -rotate-6 transition-all duration-500 hover:rotate-0 hover:scale-110 hidden sm:block">
+  <div className="absolute -bottom-12 sm:-bottom-16 -right-10 sm:-right-16 sm:w-50 sm:h-60 bg-white rounded-md shadow-lg border border-gray-100 p-2 -rotate-6 transition-all duration-500 hover:rotate-0 hover:scale-110 hidden sm:block">
     <div className="w-full h-full bg-gradient-to-br from-gray-50 to-gray-100 rounded flex items-center justify-center">
       <Image
         src="/cover/tablet.png"
