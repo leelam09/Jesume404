@@ -1,13 +1,8 @@
-'use client'
-import React from "react";
-import { Search, MapPin, Briefcase, Clock, User } from "lucide-react";
+import React from 'react'
+import Image from 'next/image'
+import { MapPin, Briefcase, Clock, User, ArrowRight } from "lucide-react";
 
-export default function JobPlatform() {
-  const companies = [
-    "Microsoft", "Google", "Apple", "Meta", "Netflix", 
-    "Adobe", "Salesforce", "Oracle", "IBM", "Intel"
-  ];
-  
+const DreamJob = () => {
   return (
     <section className="bg-gradient-to-b from-gray-100 to-white py-12 px-4 md:px-8 lg:px-16">
       <div className="max-w-6xl mx-auto">
@@ -71,19 +66,19 @@ export default function JobPlatform() {
         </div>
 
         {/* Companies Section */}
-        <div className="mb-12">
+        {/* <div className="mb-12">
           <p className="text-lg font-semibold text-black mb-6">
             <strong>Partnered with Fortune 500 companies across the globe</strong>
           </p>
           
-          {/* Fixed Company Marquee */}
+          Fixed Company Marquee
           <div className="bg-red-50 py-4 px-4 rounded-lg">
             <div className="overflow-hidden relative">
               <div className="flex whitespace-nowrap animate-marquee1">
-                {[...companies, ...companies, ...companies].map((company, index) => (
-                  <div key={`company-1-${index}`} className="mx-4 inline-flex items-center">
+                {companies1.map((company, index) => (
+                  <div key={`company1-${company.id}-${index}`} className="mx-4 inline-flex items-center flex-shrink-0">
                     <div className="bg-white p-3 rounded shadow-sm border border-gray-100 h-12 flex items-center">
-                      <img src={`/api/placeholder/100/40`} alt={`${company} logo`} className="max-h-full" />
+                      <Image src={company.src} alt={`${company.name} logo`} height={40} width={100} className="max-h-full" />
                     </div>
                   </div>
                 ))}
@@ -91,14 +86,14 @@ export default function JobPlatform() {
             </div>
           </div>
           
-          {/* Reverse Direction Marquee */}
+          Reverse Direction Marquee
           <div className="bg-blue-50 py-4 px-4 rounded-lg mt-4">
             <div className="overflow-hidden relative">
               <div className="flex whitespace-nowrap animate-marquee3">
-                {[...companies, ...companies, ...companies].map((company, index) => (
-                  <div key={`company-reverse-${index}`} className="mx-4 inline-flex items-center">
+                {companies2.map((company, index) => (
+                  <div key={`company2-${company.id}-${index}`} className="mx-4 inline-flex items-center flex-shrink-0">
                     <div className="bg-white p-3 rounded shadow-sm border border-gray-100 h-12 flex items-center">
-                      <img src={`/api/placeholder/100/40`} alt={`${company} logo`} className="max-h-full" />
+                      <Image src={company.src} alt={`${company.name} logo`} height={40} width={100} className="max-h-full" />
                     </div>
                   </div>
                 ))}
@@ -106,19 +101,19 @@ export default function JobPlatform() {
             </div>
           </div>
           
-          {/* Fixed Announcement Marquee */}
+          Fixed Announcement Marquee
           <div className="bg-red-600 p-3 rounded-lg text-white font-medium mt-4 overflow-hidden">
             <div className="relative">
               <div className="whitespace-nowrap animate-marquee2">
                 {Array(3).fill("🔥 Over 25,000 new jobs added this week! | 💼 Remote opportunities increased by 40% | 🚀 Tech sector hiring surge across all levels | ⚡ Sign up for premium access to exclusive listings").map((text, index) => (
-                  <span key={index} className="mx-4 inline-block">
+                  <span key={`announcement-${index}`} className="mx-4 inline-block">
                     {text}
                   </span>
                 ))}
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
 
         {/* Call to Action */}
         <div className="bg-black text-white p-8 rounded-lg mb-12 flex flex-col md:flex-row items-center justify-between">
@@ -130,42 +125,92 @@ export default function JobPlatform() {
             Get Started
           </button>
         </div>
+      </div>
 
-        {/* Hero Image */}
-        <div className="flex justify-center md:justify-end">
-          <div className="w-48 md:w-64 lg:w-80">
-            <img src="/api/placeholder/320/400" alt="Professional using job platform" className="max-w-full" />
+      {/* For Employers Section */}
+        <div className="bg-mint-100 w-fit mx-auto rounded-lg p-8 flex flex-col md:flex-row items-center justify-between shadow-md mb-12 border border-gray-200">
+          {/* Left Side - Image/People Section */}
+          <div className="flex items-center space-x-4 mb-6 md:mb-0 md:w-1/2">
+            <Image
+              src="/job/hire.jpg"
+              alt="Businessman"
+              width={500}
+              height={500}
+              className="object-cover rounded-lg"
+            />
+          </div>
+
+          {/* Right Side - Text Section */}
+          <div className="text-center md:text-left md:w-1/2 pl-0 md:pl-8">
+            <div className="bg-green-100 text-green-800 font-semibold px-4 py-2 rounded-full inline-block mb-4">
+              FOR EMPLOYERS
+            </div>
+            <h2 className="text-4xl lg:text-5xl font-bold text-green-900 mb-4">Looking to hire?</h2>
+            <p className="text-gray-700 mb-6 text-lg">
+              Access a talent pool of over 50 million active job seekers!
+            </p>
+            <button className="bg-red-600 hover:bg-red-700 text-white font-medium rounded flex items-center gap-2 px-8 py-3 text-base">
+              Post a Job <ArrowRight size={18} />
+            </button>
           </div>
         </div>
-      </div>
       
       {/* Updated Tailwind Animation Classes */}
-      <style jsx>{`
+      {/* <style jsx>{`
         @keyframes marquee1 {
           0% { transform: translateX(0); }
-          100% { transform: translateX(-33.33%); }
+          100% { transform: translateX(-80%); }
         }
         @keyframes marquee2 {
           0% { transform: translateX(0); }
-          100% { transform: translateX(-33.33%); }
+          100% { transform: translateX(-80%); }
         }
         @keyframes marquee3 {
-          0% { transform: translateX(-33.33%); }
+          0% { transform: translateX(-80%); }
           100% { transform: translateX(0); }
         }
         .animate-marquee1 {
-          animation: marquee1 5s linear infinite;
+          animation: marquee1 15s linear infinite;
         }
         .animate-marquee2 {
-          animation: marquee2 5s linear infinite;
+          animation: marquee2 20s linear infinite;
         }
         .animate-marquee3 {
-          animation: marquee3 5s linear infinite;
+          animation: marquee3 15s linear infinite;
         }
         .animate-marquee3:hover,.animate-marquee2:hover,.animate-marquee1:hover{
           animation-play-state: paused;
         }
-      `}</style>
+
+
+        @media(max-width:640px) {
+          @keyframes marquee1 {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-300%); }
+        }
+        @keyframes marquee2 {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-300%); }
+        }
+        @keyframes marquee3 {
+          0% { transform: translateX(-300%); }
+          100% { transform: translateX(0); }
+        }
+        .animate-marquee1 {
+          animation: marquee1 10s linear infinite;
+        }
+        .animate-marquee2 {
+          animation: marquee2 16s linear infinite;
+        }
+        .animate-marquee3 {
+          animation: marquee3 10s linear infinite;
+        }
+        .animate-marquee3:hover,.animate-marquee2:hover,.animate-marquee1:hover{
+          animation-play-state: paused;
+        }
+        }
+      `}</style> */}
     </section>
-  );
+  )
 }
+export default DreamJob;
