@@ -12,7 +12,15 @@ import AISuggestionPanel from '@/component/AISuggestionPanel';
 
 export default function Builder() {
   const searchParams = useSearchParams();
-  
+  const [selectedTemplate, setSelectedTemplate] = useState('modern');
+    useEffect(() => {
+    const templateParam = searchParams.get('template');
+    if (templateParam) {
+      setSelectedTemplate(templateParam);
+    }
+  }, [searchParams]);
+
+
   const [resumeData, setResumeData] = useState({
     personalInfo: {
       name: '',
@@ -30,9 +38,9 @@ export default function Builder() {
   });
   
   // Get template from URL or use default
-  const [selectedTemplate, setSelectedTemplate] = useState(
-    searchParams.get('template') || 'modern'
-  );
+  // const [selectedTemplate, setSelectedTemplate] = useState(`
+  //   searchParams.get('template') || 'modern'
+  // );
   
   const [showAISuggestions, setShowAISuggestions] = useState(false);
   const [activeSection, setActiveSection] = useState('summary');

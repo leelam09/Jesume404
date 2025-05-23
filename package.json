@@ -11,6 +11,7 @@
   "dependencies": {
     "@google/generative-ai": "^0.24.1",
     "@heroicons/react": "^2.2.0",
+    "cloudinary": "^2.6.1",
     "date-fns": "^4.1.0",
     "framer-motion": "^12.11.3",
     "html-to-image": "^1.11.13",

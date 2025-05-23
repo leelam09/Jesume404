@@ -392,8 +392,7 @@ const MobileFilterDrawer = ({
         <div className="flex space-x-3">
           <button
             className="flex-1 bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-4 rounded-md transition-colors"
-            onClick={onClose}
-          >
+            onClick={onClose}>
             Apply Filters
           </button>
           <button
@@ -401,8 +400,7 @@ const MobileFilterDrawer = ({
             onClick={() => {
               resetFilters();
               onClose();
-            }}
-          >
+            }}>
             Reset
           </button>
         </div>
