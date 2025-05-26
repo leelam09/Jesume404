@@ -3,6 +3,8 @@
 import Head from "next/head";
 import Image from "next/image";
 import { MagnifyingGlassIcon, ArrowRightIcon } from "@heroicons/react/24/solid";
+import Link from "next/link";
+
 
 export default function JobHero() {
   const companies1 = [
@@ -212,10 +214,13 @@ export default function JobHero() {
                 />
               </div>
 
-              <button className="bg-red-600 text-white px-6 py-3 rounded-lg flex items-center justify-center space-x-2 hover:bg-red-700 transition duration-300 shadow-md">
-                <span>Get Started</span>
-                <ArrowRightIcon className="h-5 w-5" />
-              </button>
+              <Link href="/Job/company">
+                {" "}
+                <button className="bg-red-600 text-white px-6 py-3 rounded-lg flex items-center justify-center space-x-2 hover:bg-red-700 transition duration-300 shadow-md">
+                  <span>Get Started</span>
+                  <ArrowRightIcon className="h-5 w-5" />
+                </button>
+              </Link>
             </div>
           </div>
 

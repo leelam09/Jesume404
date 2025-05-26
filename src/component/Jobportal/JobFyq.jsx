@@ -160,7 +160,7 @@ const JobFAQSection = () => {
 
           {/* Image Section - Right Side */}
           <div className="lg:w-1/2 flex flex-col justify-center items-center space-y-10">
-            <div className="relative rounded-2xl overflow-hidden shadow-lg w-full max-w-md aspect-[4/3] border-4 border-white">
+            <div className="relative rounded-2xl overflow-hidden shadow-lg w-full max-w-md aspect-[4/3] border-2 border-white">
               <img
                 src="/Jobfyq.png" // Replace with your job portal image
                 alt="CareerTronic job portal interface"

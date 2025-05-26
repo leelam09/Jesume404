@@ -3,13 +3,13 @@ import {
   Star,
   Coffee,
   Compass,
-  Users,
+  Users, 
   ArrowRight,
   Sparkles,
   TrendingUp,
 } from "lucide-react";
 import Image from "next/image";
-
+import Link from "next/link";
 const GoodCompany = () => {
   // Sample data for work-life balance stats
   const workLifeStats = [
@@ -126,7 +126,7 @@ const GoodCompany = () => {
                 title: "Work-Life Balance",
                 description:
                   "Companies that respect your time outside work lead to higher job satisfaction and better mental health.",
-                gradient: "from-red-600 to-black",
+                gradient: "from-red-500 to-red-700",
                 hoverGradient: "from-red-600 to-red-800",
               },
               {
@@ -134,7 +134,7 @@ const GoodCompany = () => {
                 title: "Growth Opportunities",
                 description:
                   "Organizations that invest in your development help you build a fulfilling and sustainable career path.",
-                gradient: "from-red-600 to-black",
+                gradient: "from-red-500 to-red-700",
                 hoverGradient: "from-red-600 to-red-800",
               },
               {
@@ -143,7 +143,7 @@ const GoodCompany = () => {
                 description:
                   "Supportive environments foster collaboration, innovation, and meaningful connections with colleagues.",
                 hoverGradient: "from-red-600 to-red-800",
-                gradient: "from-red-600 to-black",
+                gradient: "from-red-500 to-red-700",
                 hoverGradient: "from-red-600 to-red-800",
               },
             ].map((benefit, index) => (
@@ -251,17 +251,19 @@ const GoodCompany = () => {
                 Explore our company culture insights and reviews
               </p>
             </div>
-
             <div className="flex flex-col sm:flex-row gap-4">
-              <button className="group relative bg-white text-black hover:bg-gray-100 font-bold py-3 px-6 sm:px-8 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 text-sm sm:text-base">
-                <span className="relative z-10">View Top Companies</span>
-              </button>
-              <button className="group relative bg-red-600 text-white hover:bg-red-700 font-bold py-3 px-6 sm:px-8 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 text-sm sm:text-base">
-                <span className="relative z-10">Company Reviews</span>
-              </button>
-            </div>
+              <Link href="/Job/companyReview" passHref>
+                <button className="group relative bg-white text-black hover:bg-gray-100 font-bold py-3 px-6 sm:px-8 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 text-sm sm:text-base">
+                  <span className="relative z-10">View Top Companies</span>
+                </button>
+              </Link>
 
-            
+              <Link href="/Job/companyReview" passHref>
+                <button className="group relative bg-red-600 text-white hover:bg-red-700 font-bold py-3 px-6 sm:px-8 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 text-sm sm:text-base">
+                  <span className="relative z-10">Company Reviews</span>
+                </button>
+              </Link>
+            </div>
           </div>
         </div>
       </div>

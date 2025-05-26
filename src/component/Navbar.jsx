@@ -92,7 +92,7 @@ export default function Navbar() {
               className="w-48 h-auto sm:w-64 md:w-72"
             />
           </div>
-          
+
           {/* Mobile menu button */}
           <div className="flex md:hidden">
             <button
@@ -129,8 +129,12 @@ export default function Navbar() {
 
                 {/* Dropdowns */}
                 {activeDropdown === item && (
-                  <div 
-                    ref={item === "resume" ? resumeDropdownRef : coverLetterDropdownRef}
+                  <div
+                    ref={
+                      item === "resume"
+                        ? resumeDropdownRef
+                        : coverLetterDropdownRef
+                    }
                     className={`absolute top-full right-0 mt-1 z-50 bg-white shadow-lg rounded-md overflow-hidden`}
                     onMouseEnter={() => setActiveDropdown(item)}
                     onMouseLeave={handleDropdownMouseLeave}
@@ -464,25 +468,27 @@ export default function Navbar() {
             >
               Pricing
             </Link>
-            
+
             {/* Action buttons - responsive spacings */}
             <div className="hidden lg:flex items-center space-x-2 xl:space-x-4 ml-2 xl:ml-4">
               <button className="px-3 py-1.5 lg:px-4 lg:py-2 text-xs lg:text-sm font-medium text-gray-700 border border-gray-300 rounded-lg hover:bg-gray-100 transition-colors duration-200">
                 Sign Up
               </button>
-              <button className="px-3 py-1.5 lg:px-4 lg:py-2 text-xs lg:text-sm font-medium text-white bg-red-700 rounded-lg hover:bg-red-600 transition-colors duration-200">
-                Get Started
-              </button>
+              <Link href="/builder">
+                <button className="px-3 py-1.5 lg:px-4 lg:py-2 text-xs lg:text-sm font-medium text-white bg-red-700 rounded-lg hover:bg-red-600 transition-colors duration-200">
+                  Get Started
+                </button>
+              </Link>
             </div>
           </nav>
         </div>
       </div>
 
       {/* Mobile Menu - Improved with animation */}
-      <div 
+      <div
         className={`md:hidden transition-all duration-300 ease-in-out ${
-          mobileMenuOpen 
-            ? "max-h-screen opacity-100" 
+          mobileMenuOpen
+            ? "max-h-screen opacity-100"
             : "max-h-0 opacity-0 overflow-hidden"
         }`}
       >
@@ -507,10 +513,10 @@ export default function Navbar() {
               </button>
 
               {/* Mobile Dropdown Content - with animation */}
-              <div 
+              <div
                 className={`overflow-hidden transition-all duration-300 ease-in-out ${
-                  activeDropdown === item 
-                    ? "max-h-96 opacity-100" 
+                  activeDropdown === item
+                    ? "max-h-96 opacity-100"
                     : "max-h-0 opacity-0"
                 }`}
               >
@@ -546,7 +552,10 @@ export default function Navbar() {
 
                   {item === "coverLetter" && (
                     <div className="space-y-4 py-2">
-                      <Link href="/CoverLetter" className="block cursor-pointer">
+                      <Link
+                        href="/CoverLetter"
+                        className="block cursor-pointer"
+                      >
                         <h3 className="text-sm font-medium text-red-500">
                           Cover Letter Builder
                         </h3>
@@ -554,7 +563,10 @@ export default function Navbar() {
                           Write professional cover letters
                         </p>
                       </Link>
-                      <Link href="/CoverLetter" className="block cursor-pointer">
+                      <Link
+                        href="/CoverLetter"
+                        className="block cursor-pointer"
+                      >
                         <h3 className="text-sm font-medium text-red-500">
                           Templates
                         </h3>

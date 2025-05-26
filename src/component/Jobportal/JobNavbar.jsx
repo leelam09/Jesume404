@@ -49,19 +49,19 @@ export default function JobNavBar() {
               Home
             </Link>
             <Link
-              href="/jobs"
+              href="/Job/company"
               className="text-gray-700 hover:text-red-500 transition-colors"
             >
               Jobs
             </Link>
             <Link
-              href="/resume-builder"
+              href="/Resumehero"
               className="text-gray-700 hover:text-red-500 transition-colors"
             >
               Build Your Resume
             </Link>
             <Link
-              href="/companies"
+              href="/Job/companyReview"
               className="text-gray-700 hover:text-red-500 transition-colors"
             >
               Companies
