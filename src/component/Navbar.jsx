@@ -8,41 +8,84 @@ export default function Navbar() {
   const [activeDropdown, setActiveDropdown] = useState(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   
-  // Refs for dropdown containers
+  // Refs for dropdown containers and buttons
   const resumeDropdownRef = useRef(null);
   const coverLetterDropdownRef = useRef(null);
+  const resumeButtonRef = useRef(null);
+  const coverLetterButtonRef = useRef(null);
+  
+  // Timer ref for delayed hiding
+  const hideTimerRef = useRef(null);
+
+  // Function to clear hide timer
+  const clearHideTimer = () => {
+    if (hideTimerRef.current) {
+      clearTimeout(hideTimerRef.current);
+      hideTimerRef.current = null;
+    }
+  };
 
   // Function to handle mouseenter for dropdown items
   const handleMouseEnter = (item) => {
+    clearHideTimer();
     setHoveredItem(item);
     setActiveDropdown(item);
   };
 
-  // Function to handle mouseleave for dropdown items
+  // Function to handle mouseleave for dropdown items with delay
   const handleMouseLeave = (e, item) => {
-    // Check if the mouse is moving to the dropdown
-    const relatedTarget = e.relatedTarget;
-    const dropdownRef = item === "resume" ? resumeDropdownRef : coverLetterDropdownRef;
+    clearHideTimer();
     
-    // Only clear the hover state if not moving to the dropdown or its children
-    if (dropdownRef.current && !dropdownRef.current.contains(relatedTarget)) {
-      setHoveredItem(null);
-      setActiveDropdown(null);
-    }
+    // Set a delay before hiding the dropdown
+    hideTimerRef.current = setTimeout(() => {
+      const relatedTarget = e.relatedTarget;
+      const dropdownRef = item === "resume" ? resumeDropdownRef : coverLetterDropdownRef;
+      const buttonRef = item === "resume" ? resumeButtonRef : coverLetterButtonRef;
+      
+      // Only hide if not moving to dropdown or button
+      if (
+        dropdownRef.current && 
+        !dropdownRef.current.contains(relatedTarget) &&
+        buttonRef.current && 
+        !buttonRef.current.contains(relatedTarget)
+      ) {
+        setHoveredItem(null);
+        setActiveDropdown(null);
+      }
+    }, 150); // 150ms delay
   };
 
-  // Function to handle dropdown mouseleave
-  const handleDropdownMouseLeave = () => {
-    setHoveredItem(null);
-    setActiveDropdown(null);
+  // Function to handle dropdown mouseenter
+  const handleDropdownMouseEnter = (item) => {
+    clearHideTimer();
+    setHoveredItem(item);
+    setActiveDropdown(item);
+  };
+
+  // Function to handle dropdown mouseleave with delay
+  const handleDropdownMouseLeave = (e, item) => {
+    clearHideTimer();
+    
+    hideTimerRef.current = setTimeout(() => {
+      const relatedTarget = e.relatedTarget;
+      const buttonRef = item === "resume" ? resumeButtonRef : coverLetterButtonRef;
+      
+      // Only hide if not moving back to the button
+      if (buttonRef.current && !buttonRef.current.contains(relatedTarget)) {
+        setHoveredItem(null);
+        setActiveDropdown(null);
+      }
+    }, 150); // 150ms delay
   };
 
   // Handle hover for regular links
   const handleLinkHover = (item) => {
+    clearHideTimer();
     setHoveredItem(item);
   };
 
   const handleLinkLeave = () => {
+    clearHideTimer();
     setHoveredItem(null);
   };
 
@@ -80,6 +123,13 @@ export default function Navbar() {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [mobileMenuOpen]);
 
+  // Cleanup timer on unmount
+  useEffect(() => {
+    return () => {
+      clearHideTimer();
+    };
+  }, []);
+
   return (
     <header className="relative bg-white shadow-sm z-50">
       <div className="container mx-auto px-4">
@@ -112,15 +162,16 @@ export default function Navbar() {
               <div
                 key={item}
                 className="relative"
-                onMouseEnter={() => handleMouseEnter(item)}
-                onMouseLeave={(e) => handleMouseLeave(e, item)}
               >
                 <button
+                  ref={item === "resume" ? resumeButtonRef : coverLetterButtonRef}
                   className={`flex items-center transition-colors px-2 py-1 rounded-md ${
                     hoveredItem === item || activeDropdown === item
                       ? "text-red-500"
                       : "text-gray-700 hover:text-red-500"
                   }`}
+                  onMouseEnter={() => handleMouseEnter(item)}
+                  onMouseLeave={(e) => handleMouseLeave(e, item)}
                 >
                   {item === "resume" && "Resume"}
                   {item === "coverLetter" && "Cover Letter"}
@@ -136,8 +187,8 @@ export default function Navbar() {
                         : coverLetterDropdownRef
                     }
                     className={`absolute top-full right-0 mt-1 z-50 bg-white shadow-lg rounded-md overflow-hidden`}
-                    onMouseEnter={() => setActiveDropdown(item)}
-                    onMouseLeave={handleDropdownMouseLeave}
+                    onMouseEnter={() => handleDropdownMouseEnter(item)}
+                    onMouseLeave={(e) => handleDropdownMouseLeave(e, item)}
                   >
                     {item === "resume" && (
                       <div className="p-5 w-64 flex flex-col gap-3">
