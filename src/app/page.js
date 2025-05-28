@@ -10,7 +10,7 @@ import JobFAQSection from '@/component/Jobportal/JobFyq'
 
 const page = () => {
   return (
-    <div>
+    <div className='h-auto w-full overflow-x-hidden'>
     <div><JobNavBar/></div>
     <div><JobHero/></div>
     <div><DreamJob/></div>

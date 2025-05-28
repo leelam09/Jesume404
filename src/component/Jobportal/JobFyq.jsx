@@ -87,7 +87,7 @@ const JobFAQSection = () => {
             <div className="space-y-5">
               {faqs.map((faq, index) => (
                 <ScrollReveal
-                  key={index}
+                  key={faq.question} // Prefer id if available
                   animation="slideUp"
                   duration={500}
                   delay={index * 100} // staggered delay for nice effect

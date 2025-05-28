@@ -263,128 +263,58 @@ export default function JobHero() {
           </div>
 
           {/* Right side - Images (now second in DOM order) */}
-          <div className="w-full md:w-1/2 relative">
-            <div className="relative h-[400px] flex items-center justify-center gap-4">
-              {/* Main Oval Image - Gentle fade */}
-              <ScrollReveal 
-                animation="fadeIn" 
-                duration={900} 
-                delay={300}
-                easing="gentle"
-                disableBelow="sm"
-              >
-                <div className="relative w-[300px] h-[450px] rounded-[100px] overflow-hidden shadow-lg">
-                  <Image
-                    src="/job/JH1.jpg"
-                    alt="Varun Nguyen"
-                    fill
-                    className="object-cover"
-                  />
-                    <div className="absolute bottom-0 w-full bg-black bg-opacity-80 p-2 text-center">
-                      <p className="text-xs text-gray-300">Job consultant</p>
-                    </div>
-                </div>
-              </ScrollReveal>
+          <div className="flex flex-col lg:flex-row items-center lg:items-start justify-center gap-8 lg:gap-16 max-w-7xl mx-auto py-10">
+  {/* Left side: Large portrait image */}
+  <div className="w-[300px] h-[400px] rounded-[100px] overflow-hidden shadow-xl relative">
+    <Image
+      src="/job/JH1.jpg"
+      alt="Job consultant"
+      fill
+      className="object-cover"
+    />
+    <div className="absolute bottom-0 w-full bg-black bg-opacity-70 text-white text-center text-sm py-2">
+      Job consultant
+    </div>
+  </div>
 
-              {/* Side Images - Slight movements */}
-              <ScrollReveal 
-                animation="slightRight" 
-                duration={700} 
-                delay={500}
-                easing="smooth"
-                disableBelow="sm"
-              >
-                <div className="w-[130px] h-[220px] ml-2 bg-white rounded-[75px] mb-54 overflow-hidden shadow-lg">
-                  <Image
-                    src="/job/JH3.jpg"
-                    alt="Job profile"
-                    width={150}
-                    height={280}
-                    className="object-cover h-full w-full"
-                  />
-                </div>
-              </ScrollReveal>
-              
-              <ScrollReveal 
-                animation="slightRight" 
-                duration={700} 
-                delay={650}
-                easing="smooth"
-                disableBelow="sm"
-              >
-                <div className="w-[130px] h-[220px] ml-2 bg-white rounded-[75px] mb-54 overflow-hidden shadow-lg">
-                  <Image
-                    src="/job/JH2.jpg"
-                    alt="Job profile"
-                    width={150}
-                    height={280}
-                    className="object-cover h-full w-full"
-                  />
-                </div>
-              </ScrollReveal>
-            </div>
+  {/* Right side: Two circular images + stat box */}
+  <div className="flex flex-col items-center lg:items-start gap-6">
+    {/* Circular images row (stacked horizontally or vertically) */}
+    <div className="flex gap-4 lg:flex-row">
+      <div className="w-28 h-48 rounded-full overflow-hidden relative shadow-md">
+        <Image
+          src="/job/JH3.jpg"
+          alt="image1"
+          fill
+          className="object-cover"
+        />
+      </div>
+      <div className="w-28 h-48 rounded-full overflow-hidden relative shadow-md">
+        <Image
+          src="/job/JH2.jpg"
+          alt="image2"
+          fill
+          className="object-cover"
+        />
+      </div>
+    </div>
 
-            {/* Stats Card */}
-            <ScrollReveal 
-              animation="fadeSlideUp" 
-              duration={600} 
-              delay={200}
-              easing="spring"
-              className="absolute bottom-0 right-4 bg-zinc-800 text-white rounded-3xl p-9 mr-4 w-[300px] grid grid-cols-2 gap-4 text-center shadow-xl"
-            >
-              <ScrollReveal 
-                animation="slightUp" 
-                duration={500} 
-                delay={400}
-                index={0}
-                stagger={100}
-              >
-                <div>
-                  <p className="text-xl font-bold">14K+</p>
-                  <p className="text-xs text-gray-300">Freelance available</p>
-                </div>
-              </ScrollReveal>
-              
-              <ScrollReveal 
-                animation="slightUp" 
-                duration={500} 
-                delay={400}
-                index={1}
-                stagger={100}
-              >
-                <div>
-                  <p className="text-xl font-bold">4.9</p>
-                  <p className="text-xs text-gray-300">client satisfaction</p>
-                </div>
-              </ScrollReveal>
-              
-              <ScrollReveal 
-                animation="slightUp" 
-                duration={500} 
-                delay={400}
-                index={2}
-                stagger={100}
-              >
-                <div>
-                  <p className="text-xl font-bold">98%</p>
-                  <p className="text-xs text-gray-300">big companies</p>
-                </div>
-              </ScrollReveal>
-              
-              <ScrollReveal 
-                animation="slightUp" 
-                duration={500} 
-                delay={400}
-                index={3}
-                stagger={100}
-              >
-                <div>
-                  <p className="text-xl font-bold">2.6K</p>
-                  <p className="text-xs text-gray-300">jobs applied</p>
-                </div>
-              </ScrollReveal>
-            </ScrollReveal>
-          </div>
+    {/* Stats box */}
+    <div className="bg-zinc-800 text-white rounded-2xl p-6 w-[300px] sm:w-[340px] grid grid-cols-2 gap-4 text-center shadow-lg">
+      {[
+        { label: "Freelance available", value: "14K+" },
+        { label: "client satisfaction", value: "4.9" },
+        { label: "big companies", value: "98%" },
+        { label: "jobs applied", value: "2.6K" },
+      ].map((stat, index) => (
+        <div key={index}>
+          <p className="text-lg font-bold">{stat.value}</p>
+          <p className="text-sm text-gray-300">{stat.label}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</div>
         </div>
       </main>
 
