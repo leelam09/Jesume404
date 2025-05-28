@@ -309,7 +309,7 @@ export default function JobHero() {
       ].map((stat, index) => (
         <div key={index}>
           <p className="text-lg font-bold">{stat.value}</p>
-          <p className="text-sm text-gray-300">{stat.label}</p>
+          <p className="text-sm text-gray-300 capitalize">{stat.label}</p>
         </div>
       ))}
     </div>
