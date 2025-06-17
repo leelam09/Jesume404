@@ -121,7 +121,7 @@ const CompaniesReview = () => {
         <JobNavBar />
 
         {/* Hero Section */}
-        <div className="bg-gradient-to-r from-red-800 via-red-700 to-red-600 text-white py-24 px-4 relative overflow-hidden">
+        <div className="bg-black text-white py-24 px-4 relative overflow-hidden">
           {/* Decorative elements */}
           <div className="absolute top-0 left-0 w-full h-full opacity-10">
             <div className="absolute top-20 left-20 w-40 h-40 rounded-full bg-white"></div>

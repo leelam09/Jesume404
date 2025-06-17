@@ -1,6 +1,9 @@
 import React from 'react'
+
 import Image from 'next/image'
 import ScrollReveal from '../ScrollReveal';
+import Link from "next/link";
+
 import { MapPin, Briefcase, Clock, User, ArrowRight } from "lucide-react";
 
 const DreamJob = () => {
@@ -9,6 +12,7 @@ const DreamJob = () => {
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="text-center mb-10">
+Updated upstream
           <ScrollReveal animation="fadeSlideUp" duration={800} delay={100}>
             <p className="text-red-600 font-medium mb-3">
               THE ULTIMATE CAREER DESTINATION
@@ -97,9 +101,90 @@ const DreamJob = () => {
               </div>
             </ScrollReveal>
           ))}
+
+          <p className="text-red-600 font-medium mb-3">
+            THE ULTIMATE CAREER DESTINATION
+          </p>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-black mb-4">
+            Find your dream job today
+          </h1>
+          <p className="text-lg md:text-xl text-gray-800">
+            Access over 10 million opportunities worldwide
+          </p>
         </div>
 
-        
+        {/* Search Bar */}
+        <div className="bg-white rounded-lg shadow-md p-2 flex flex-col md:flex-row mb-12 border border-gray-200">
+          <div className="flex items-center border-b md:border-b-0 md:border-r border-gray-200 flex-1 p-2">
+            <Briefcase className="text-gray-400 mr-2" size={20} />
+            <input
+              type="text"
+              placeholder="Job title, skills or keywords"
+              className="w-full outline-none text-gray-800"
+            />
+          </div>
+          <div className="flex items-center border-b md:border-b-0 md:border-r border-gray-200 flex-1 p-2">
+            <Clock className="text-gray-400 mr-2" size={20} />
+            <select className="w-full outline-none text-gray-800 bg-transparent">
+              <option>Experience Level</option>
+              <option>Entry Level</option>
+              <option>Mid-Senior Level</option>
+              <option>Director</option>
+              <option>Executive</option>
+            </select>
+          </div>
+          <div className="flex items-center flex-1 p-2">
+            <MapPin className="text-gray-400 mr-2" size={20} />
+            <input
+              type="text"
+              placeholder="City, state or remote"
+              className="w-full outline-none text-gray-800"
+            />
+          </div>
+          <button className="bg-red-600 hover:bg-red-700 text-white font-medium px-6 py-2 rounded mt-3 md:mt-0 md:ml-3">
+            Find Jobs
+          </button>
+        </div>
+
+        {/* Key Features */}
+        <div className="mb-12 grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="bg-white p-6 rounded-lg shadow-md border border-gray-100">
+            <div className="text-red-600 mb-3">
+              <User size={24} />
+            </div>
+            <h3 className="text-xl font-bold text-black mb-2">
+              Personalized Matches
+            </h3>
+            <p className="text-gray-700">
+              AI-powered job recommendations based on your skills and
+              preferences
+            </p>
+          </div>
+          <div className="bg-white p-6 rounded-lg shadow-md border border-gray-100">
+            <div className="text-red-600 mb-3">
+              <Clock size={24} />
+            </div>
+            <h3 className="text-xl font-bold text-black mb-2">
+              Real-time Updates
+            </h3>
+            <p className="text-gray-700">
+              Be the first to know about new opportunities with instant
+              notifications
+            </p>
+          </div>
+          <div className="bg-white p-6 rounded-lg shadow-md border border-gray-100">
+            <div className="text-red-600 mb-3">
+              <Briefcase size={24} />
+            </div>
+            <h3 className="text-xl font-bold text-black mb-2">
+              Career Resources
+            </h3>
+            <p className="text-gray-700">
+              Access resume builder, interview tips, and salary insights
+            </p>
+          </div>
+        </div>
+
         {/* Call to Action */}
         <ScrollReveal animation="fadeSlideUp" duration={800} delay={100}>
           <div className="bg-red-600 text-white p-8 rounded-lg mb-12 flex flex-col md:flex-row items-center justify-between">
@@ -114,7 +199,6 @@ const DreamJob = () => {
         </ScrollReveal>
       </div>
 
-      
       {/* Updated Tailwind Animation Classes */}
       {/* <style jsx>{`
         @keyframes marquee1 {
@@ -171,6 +255,6 @@ const DreamJob = () => {
         }
       `}</style> */}
     </section>
-  )
+  );
 }
 export default DreamJob;

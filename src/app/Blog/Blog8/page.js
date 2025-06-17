@@ -1,11 +1,12 @@
+import CoverLetterVsResume from '@/component/Blog/Blog8'
 import React from 'react'
-import BlogMain from '@/component/Blog/BlogMain'
 
 const page = () => {
   return (
     <div>
+<div><CoverLetterVsResume/></div>
 
-      <div><BlogMain/></div>
+
     </div>
   )
 }

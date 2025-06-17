@@ -1,11 +1,11 @@
+import ResumetoInterviewBlog from '@/component/Blog/Blog5'
 import React from 'react'
-import BlogMain from '@/component/Blog/BlogMain'
 
 const page = () => {
   return (
     <div>
+<div><ResumetoInterviewBlog/></div>
 
-      <div><BlogMain/></div>
     </div>
   )
 }

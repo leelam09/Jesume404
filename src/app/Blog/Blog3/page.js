@@ -1,11 +1,11 @@
+import AIToolsBlog from '@/component/Blog/Blog3'
 import React from 'react'
-import BlogMain from '@/component/Blog/BlogMain'
 
 const page = () => {
   return (
     <div>
+<div><AIToolsBlog/></div>
 
-      <div><BlogMain/></div>
     </div>
   )
 }

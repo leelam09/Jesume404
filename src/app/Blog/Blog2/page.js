@@ -1,11 +1,12 @@
+import GPTResumeBlog from '@/component/Blog/Blog2'
 import React from 'react'
-import BlogMain from '@/component/Blog/BlogMain'
 
 const page = () => {
   return (
     <div>
 
-      <div><BlogMain/></div>
+<div><GPTResumeBlog/></div>
+
     </div>
   )
 }

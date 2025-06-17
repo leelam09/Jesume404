@@ -1,11 +1,12 @@
+import AIResumeBlogRedesign from '@/component/Blog/Blog1'
 import React from 'react'
-import BlogMain from '@/component/Blog/BlogMain'
 
 const page = () => {
   return (
     <div>
 
-      <div><BlogMain/></div>
+<div><AIResumeBlogRedesign/></div>
+
     </div>
   )
 }
